@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_10_01_024718) do
+ActiveRecord::Schema.define(version: 2025_10_01_085444) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -87,9 +87,11 @@ ActiveRecord::Schema.define(version: 2025_10_01_024718) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
-    t.integer "owner_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "introduction"
+    t.string "profile_image_id"
+    t.integer "owner_id", null: false
     t.index ["owner_id"], name: "index_groups_on_owner_id"
   end
 
@@ -137,7 +139,7 @@ ActiveRecord::Schema.define(version: 2025_10_01_024718) do
   add_foreign_key "favorites", "users"
   add_foreign_key "group_memberships", "groups"
   add_foreign_key "group_memberships", "users"
-  add_foreign_key "groups", "owners"
+  add_foreign_key "groups", "users", column: "owner_id"
   add_foreign_key "user_rooms", "rooms"
   add_foreign_key "user_rooms", "users"
 end
